@@ -12,4 +12,12 @@ class Window {
             window = al_create_display(width, height);
             enforce(window, "Failed to create display");
         }
+
+    @property int width() {
+        return al_get_display_width(window);
+    }
+
+    @property int height() {
+        return al_get_display_height(window);
+    }
 }
