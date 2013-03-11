@@ -8,5 +8,6 @@
 	"dependencies": {
 	},
     "libs": ["dallegro5", "allegro"],
-    "targetType": "library"
+    "targetType": "library",
+    "dflags": ["-w", "-O", "-unittest"]
 }
