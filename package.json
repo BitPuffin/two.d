@@ -6,6 +6,8 @@
     "license": "Zlib",
 	"authors": ["Isak Andersson"],
     "libs": ["dallegro5", "allegro"],
+    "targetType": "library",
+    "dflags": ["-w", "-O", "-release"],
     "configurations": [
         {
             "name": "default",
