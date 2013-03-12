@@ -12,3 +12,6 @@ static this() {
     al_init();
 }
 
+version(unittest) {
+    void main(){}
+}
