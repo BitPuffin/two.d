@@ -70,6 +70,14 @@ class Window {
             }
             al_flip_display();
         }
+        
+        /** Rezises the window to the specified dimensions
+          *
+          * Returns: true, if the resize is a success, false if not.
+          */
+        bool resize(int width, int height) {
+            return al_resize_display(window, width, height);
+        }
 
         /** Gets the raw pointer to the ALLEGRO_DISPLAY object.
          *
