@@ -42,10 +42,12 @@ class Window {
         }
 
         /// Gets the current width of the game window
+        /// See_Also: resize, height
         @property int width() {
             return al_get_display_width(window);
         }
         /// Gets the current hegiht of the game window
+        /// See_Also: resize, width
         @property int height() {
             return al_get_display_height(window);
         }
