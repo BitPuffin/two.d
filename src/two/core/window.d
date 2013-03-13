@@ -3,6 +3,8 @@ module two.core.window;
 import std.exception: enforce;
 import allegro5.display;
 
+import two.core.graphics.base: Drawable;
+
 // The currently active window in the allegro library
 private ALLEGRO_DISPLAY* current_window;
 
@@ -66,10 +68,7 @@ class Window {
           * back buffer by default.
           */
         void flip() {
-            if (!isCurrent()) {
-                al_set_target_backbuffer(window);
-                current_window = window;
-            }
+            setCurrentIfNotCurrent();
             al_flip_display();
         }
         
@@ -79,6 +78,11 @@ class Window {
           */
         bool resize(int width, int height) {
             return al_resize_display(window, width, height);
+        }
+
+        void draw(Drawable drawee) {
+            setCurrentIfNotCurrent();
+            drawee.draw();
         }
 
         /** Gets the raw pointer to the ALLEGRO_DISPLAY object.
@@ -93,5 +97,12 @@ class Window {
     private:
         bool isCurrent() {
             return current_window == window;
+        }
+        void setCurrent() {
+            al_set_target_backbuffer(window);
+            current_window = window;
+        }
+        void setCurrentIfNotCurrent() {
+            if (!isCurrent) setCurrent();
         }
 }
