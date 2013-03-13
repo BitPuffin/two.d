@@ -64,7 +64,7 @@ class Window {
           * back buffer by default.
           */
         void flip() {
-            if (window != current_window) {
+            if (!isCurrent()) {
                 al_set_target_backbuffer(window);
                 current_window = window;
             }
@@ -86,5 +86,10 @@ class Window {
          */
         ALLEGRO_DISPLAY* getAllegroDisplayPointer() {
             return window;
+        }
+
+    private:
+        bool isCurrent() {
+            return current_window == window;
         }
 }
