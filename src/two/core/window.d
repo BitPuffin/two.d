@@ -59,6 +59,15 @@ class Window {
         void destroy() {
             al_destroy_display(window);
         }
+        
+        void draw(Drawable drawee) {
+            setCurrentIfNotCurrent();
+            drawee.draw();
+        }
+        void drawAt(Drawable drawee, int x, int y) {
+            setCurrentIfNotCurrent();
+            drawee.drawAt(x, y);
+        }
 
         /** Flips the buffers of the display object
           *
@@ -80,16 +89,11 @@ class Window {
             return al_resize_display(window, width, height);
         }
 
-        void draw(Drawable drawee) {
-            setCurrentIfNotCurrent();
-            drawee.draw();
-        }
-
         /** Gets the raw pointer to the ALLEGRO_DISPLAY object.
-         *
-         *  Not used very often, only if you want to complete actions on the raw display object using the allegro API.
-         *  Might be a good idea to set the pointer to null after you are done. Just for the sake of GC.
-         */
+          *
+          * Not used very often, only if you want to complete actions on the raw display object using the allegro API.
+          * Might be a good idea to set the pointer to null after you are done. Just for the sake of GC.
+          */
         ALLEGRO_DISPLAY* getAllegroDisplayPointer() {
             return window;
         }
