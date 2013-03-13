@@ -28,27 +28,32 @@ class Window {
                 al_set_new_display_option(ALLEGRO_DISPLAY_OPTIONS.ALLEGRO_VSYNC, 0, ALLEGRO_SUGGEST);
             }
         }
-    void setTitle(string title) {
-        al_set_window_title(window, title.idup.ptr);
-    }
-
-    @property int width() {
-        return al_get_display_width(window);
-    }
-    @property int height() {
-        return al_get_display_height(window);
-    }
-    unittest { auto w = new Window(50, 70); assert(w.width == 50 && w.height == 70, "window resolution properties are broken!"); }
-
-    void destroy() {
-        al_destroy_display(window);
-    }
-
-    void flip() {
-        if (window != current_window) {
-            al_set_target_backbuffer(window);
-            current_window = window;
+        ~this() {
+            al_destroy_display(window);
         }
-        al_flip_display();
-    }
+
+
+        void setTitle(string title) {
+            al_set_window_title(window, title.idup.ptr);
+        }
+
+        @property int width() {
+            return al_get_display_width(window);
+        }
+        @property int height() {
+            return al_get_display_height(window);
+        }
+        unittest { auto w = new Window(50, 70); assert(w.width == 50 && w.height == 70, "window resolution properties are broken!"); }
+
+        void destroy() {
+            al_destroy_display(window);
+        }
+
+        void flip() {
+            if (window != current_window) {
+                al_set_target_backbuffer(window);
+                current_window = window;
+            }
+            al_flip_display();
+        }
 }
